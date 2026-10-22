@@ -56,8 +56,8 @@
   },
   "by_quarter": {
     "2025Q1": {
-      "PAID_PENDING": 10,
       "WRONG_DATA": 8,
+      "PAID_PENDING": 10,
       "OTHER_CHALLAN": 38,
       "COURT_ROUTING": 1,
       "OVERCHARGE": 3,
@@ -147,6 +147,18 @@
     "share_q2": 0.066,
     "share_q3": 0.078,
     "share_ratio": 1.182
+  },
+  "since_acquisition": {
+    "dates": {
+      "carinfo": "2026-01-05",
+      "vehicleinfo": "2026-03-11"
+    },
+    "challan_reviews": {
+      "carinfo": 307,
+      "cars24": 79,
+      "vehicleinfo": 367
+    },
+    "failure_reviews": 399
   },
   "false_settled_total": 18,
   "estimates": {

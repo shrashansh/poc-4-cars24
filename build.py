@@ -61,6 +61,9 @@ def render_readme_table(m: dict) -> str:
         "|---|---|---|",
         f"| 1-2 star Play reviews read ({m['window'][0]} to {m['window'][1]}) | {sum(m['low_star_total'].values()):,} ({low}) | `metrics.low_star_total` |",
         f"| Of those, about challans | {sum(m['challan_reviews'].values()):,} ({per_app}) | `metrics.challan_reviews` |",
+        f"| Of those, written after Cars24 owned the app | {sum(m['since_acquisition']['challan_reviews'].values()):,} "
+        f"({', '.join(f'{APP_NAMES[a]} {n:,}' for a, n in sorted(m['since_acquisition']['challan_reviews'].items()))}; "
+        f"CarInfo from {m['since_acquisition']['dates']['carinfo']}, VehicleInfo from {m['since_acquisition']['dates']['vehicleinfo']}) | `metrics.since_acquisition` |",
         f"| Challan-failure reviews as a share of all 1-2 star reviews, 2026 Q2 to Q3 | {_pct(q['share_q2'])} to {_pct(q['share_q3'])} "
         f"(keyword rules flag {q['2026Q2']} then {q['2026Q3']}; all 1-2 star reviews also rose, {q['low_star_q2']:,} to {q['low_star_q3']:,}) | `metrics.q3_vs_q2` |",
         f"| Failures within Cars24's and its payment partner's control, based on how users describe them | {_pct(s['control']['in_control']['share'])} "

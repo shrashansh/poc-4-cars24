@@ -12,6 +12,8 @@ from audit.classify import TYPES, classify, control_bucket
 
 FAILURE_TYPES = TYPES[:-1]
 PARTIAL_QUARTERS = ["2026Q4"]
+# Date Cars24 owned each app (sources S10, S11). Earlier reviews describe the previous owner.
+ACQUIRED = {"cars24": "2000-01-01", "carinfo": "2026-01-05", "vehicleinfo": "2026-03-11"}
 REDIRECT = re.compile(r"\[EMAIL\]|\bform\b|\blink\b|write to us|mail us", re.I)
 TIMELINE = re.compile(r"\b\d+\s*(?:-|–|to)?\s*\d*\s*(?:working |business )?days\b", re.I)
 
@@ -107,6 +109,12 @@ def compute(reviews: list[dict], base_counts: dict, validation: dict, validation
                      "share_q3": _share(failing["2026Q3"], low["2026Q3"]),
                      "share_ratio": _share(_share(failing["2026Q3"], low["2026Q3"]),
                                            _share(failing["2026Q2"], low["2026Q2"]))},
+        "since_acquisition": {
+            "dates": {a: d for a, d in ACQUIRED.items() if a != "cars24"},
+            "challan_reviews": dict(Counter(r["app"] for r in reviews if r["at"][:10] >= ACQUIRED.get(r["app"], "0"))),
+            "failure_reviews": sum(1 for r, types in labelled
+                                   if types & set(FAILURE_TYPES) and r["at"][:10] >= ACQUIRED.get(r["app"], "0")),
+        },
         "false_settled_total": sum(type_counts["FALSE_SETTLED"].values()),
         "estimates": estimates,
         "control_split": control,

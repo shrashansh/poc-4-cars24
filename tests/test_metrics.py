@@ -96,5 +96,15 @@ class MetricsTest(unittest.TestCase):
         self.assertNotIn("failure_rate", json.dumps(self.m))
 
 
+class SinceAcquisitionTest(unittest.TestCase):
+    def test_counts_only_reviews_after_cars24_owned_the_app(self):
+        reviews = [rv(1, "2025-12-31 10:00:00", "paid challan still pending"),
+                   rv(2, "2026-01-05 09:00:00", "paid challan still pending")]
+        m = compute(reviews, BASE, {"dev": SCORE, "test": SCORE})
+        self.assertEqual(m["since_acquisition"]["challan_reviews"], {"carinfo": 1})
+        self.assertEqual(m["since_acquisition"]["dates"]["carinfo"], "2026-01-05")
+        self.assertEqual(m["since_acquisition"]["failure_reviews"], 1)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -8,7 +8,7 @@ Cars24 lets people pay traffic challans on cars24.com, CarInfo and VehicleInfo. 
 
 When this goes wrong, the user has paid but the challan is still open. Their Google Play reviews tell the same story again and again: money taken, the challan still pending on Parivahan weeks later, a refund that never arrives. Some say the app showed "Settled" while the government site still showed the challan as unpaid.
 
-This matters more in 2026 than before. Under the CMV Rules 2026 (G.S.R. 48(E), in force since 21 January 2026, S6), press reports say a vehicle with unpaid challans can be marked "Not to be transacted". For Cars24 that is no longer only an app-store problem. It touches every car it buys and sells.
+This matters more in 2026 than before. On 28 September 2026 the Supreme Court directed states to blacklist vehicles with unpaid e-challans and block their ownership transfer (S6), and a draft amendment would mark them "Not to be Transacted" (S9, not yet in force). For Cars24 that is no longer only an app-store problem. It touches every car it buys and sells.
 
 ## The numbers
 
@@ -19,6 +19,7 @@ These come straight from the data in this repository. `python3 build.py` regener
 |---|---|---|
 | 1-2 star Play reviews read (2025-01-01 to 2026-10-22) | 11,540 (CarInfo 2,702, Cars24 5,232, VehicleInfo 3,606) | `metrics.low_star_total` |
 | Of those, about challans | 1,167 (CarInfo 470, Cars24 79, VehicleInfo 618) | `metrics.challan_reviews` |
+| Of those, written after Cars24 owned the app | 753 (CarInfo 307, Cars24 79, VehicleInfo 367; CarInfo from 2026-01-05, VehicleInfo from 2026-03-11) | `metrics.since_acquisition` |
 | Challan-failure reviews as a share of all 1-2 star reviews, 2026 Q2 to Q3 | 7% to 8% (keyword rules flag 88 then 212; all 1-2 star reviews also rose, 1,330 to 2,701) | `metrics.q3_vs_q2` |
 | Failures within Cars24's and its payment partner's control, based on how users describe them | 74% (95% CI 65% to 81%) of 116 failure reviews in the labelled sample | `metrics.sample_estimates.control.in_control` |
 | Failures about wrong, missing or stale challan data | 25% (95% CI 18% to 34%) | `metrics.sample_estimates.control.partial` |
@@ -69,7 +70,7 @@ The same engine fits the moment Cars24 buys a car. At inspection it could pay th
 1. **Reviews.** 1-2 star Google Play reviews of Cars24 (`com.cars24.seller`), CarInfo (`com.cuvora.carinfo`) and VehicleInfo (`com.vehicle.rto.vahan.status.information.register`), dated 1 January 2025 to 22 October 2026, collected on 22 October 2026 with `google-play-scraper`. The collection used several passes (newest first, and filtered by star rating) to reach back to January 2025. `audit/pull.py` is a simpler re-pull script; the store changes daily, so a re-pull will not match byte for byte. The SHA-256 of each file actually used is recorded in `data/metrics.json`.
 2. **Privacy.** Only eight fields per review are kept. Names in reply greetings, phone numbers, emails, registration numbers, challan numbers, bank and UPI references are masked before anything is saved (`audit/mask.py`). Tests fail the build if any of these appear in a shipped file.
 3. **Classification.** Fixed keyword rules in English, Hinglish and Devanagari (`audit/classify.py`) tag six kinds of failure: paid but pending, false "Settled", wrong data, refund stuck, overcharge, and court involvement. There is no model in the loop, so every build gives the same answer.
-4. **Labelled sample.** A stratified random sample of 150 challan reviews (seed 24) was read one by one and labelled against those six definitions (`data/validation.csv`). The rules were tuned on the first 50 only. The other 100 were held back and scored once, and the build fails if precision on them drops below 0.80. The labels and the rules come from the same analysis, so the held-out score is probably a little optimistic.
+4. **Labelled sample.** A stratified random sample of 150 challan reviews (seed 24) was read one by one and labelled against those six definitions (`data/validation.csv`). The first reader was an AI model (Claude) reading the review text only, without the rules' output; `python3 -m audit.label_check` gives the author a blind page to re-label 50 of them, and the build then reports agreement. The rules were tuned on the first 50 only. The other 100 were held back and scored once, and the build fails if precision on them drops below 0.80. The labels and the rules come from the same analysis, so the held-out score is probably a little optimistic.
 5. **Estimates.** Headline shares use the labelled sample with 95% Wilson intervals, because the keyword rules miss some reviews.
 
 ## What this does not show
@@ -105,6 +106,9 @@ Python 3.10 or later, no other dependencies. `python3 prepare.py` rebuilds `data
 | S3 | CarInfo: challan payments are "strictly non-refundable and non-cancellable once processed" | https://www.carinfo.app/refund-policy |
 | S4 | VehicleInfo pays challans "via secure, authorized partners" (developer reply on Google Play, 24 April 2026) | Google Play listing |
 | S5 | e-Challan: a challan forwarded to the Virtual Court "can be paid here" (checked live, 22 October 2026) | https://echallan.parivahan.gov.in/index/accused-challan |
-| S6 | CMV (Third Amendment) Rules 2026, G.S.R. 48(E), in force 21 January 2026 (secondary source) | https://teamleaseregtech.com/updates/article/52088/ |
+| S6 | Supreme Court, S. Rajaseekaran v. Union of India, 28 Sep 2026: block ownership transfer for unpaid e-challans (LiveLaw report) | https://www.livelaw.in/top-stories/impound-vehicles-with-unpaid-e-challans-freeze-online-services-supreme-court-orders-notes-over-23000-crore-traffic-fines-pending-552686 |
 | S7 | Spinny's provider Pureride "does not guarantee … that the challans shall be settled" | https://www.spinny.com/e-challan/terms-and-conditions/ |
 | S8 | RBI payment aggregator directions: other charges must be "distinctly displayed to the payer prior to the transaction" | https://rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=12896 |
+| S9 | Draft CMV amendment: "Not to be Transacted" flag for unpaid challans (draft, not in force) | https://www.digit.in/news/general/unpaid-traffic-challan-your-rc-and-driving-licence-may-soon-get-blocked-here-is-how-to-pay-online.html |
+| S10 | Cars24 acquires CarInfo, 5 Jan 2026 (MediaNama) | https://www.medianama.com/2026/01/223-cars24-acquires-carinfo-rs-118-crore-ahead-ipo/ |
+| S11 | Cars24 acquires Vehicle Info, reported 11 Mar 2026 (Entrepreneur India) | https://india.entrepreneur.com/news-and-trends/cars24-acquires-automotive-utility-app-vehicle-info/503346 |
