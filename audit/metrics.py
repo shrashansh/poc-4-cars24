@@ -65,7 +65,7 @@ def compute(reviews: list[dict], base_counts: dict, validation: dict, validation
     by_quarter: dict[str, Counter] = defaultdict(Counter)
     buckets: Counter = Counter()
     for r, types in labelled:
-        for t in types:
+        for t in sorted(types):
             type_counts[t][r["app"]] += 1
             by_quarter[quarter(r["at"])][t] += 1
         buckets[control_bucket(types, r["text"])] += 1
@@ -99,7 +99,7 @@ def compute(reviews: list[dict], base_counts: dict, validation: dict, validation
         "low_star_total": {a: sum(q.values()) for a, q in base_counts["low_star"].items()},
         "challan_reviews": dict(Counter(r["app"] for r in reviews)),
         "type_counts": {t: dict(c) for t, c in type_counts.items()},
-        "by_quarter": {q: dict(by_quarter[q]) for q in sorted(by_quarter)},
+        "by_quarter": {q: dict(sorted(by_quarter[q].items())) for q in sorted(by_quarter)},
         "failing_by_quarter": dict(sorted(failing.items())),
         "partial_quarters": PARTIAL_QUARTERS,
         "q3_vs_q2": {"2026Q2": failing["2026Q2"], "2026Q3": failing["2026Q3"],

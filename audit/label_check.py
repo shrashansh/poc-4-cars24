@@ -14,7 +14,7 @@ from audit.validate import load_rows
 ROOT = Path(__file__).resolve().parent.parent
 DEFINITIONS = {
     "PAID_PENDING": "Paid (in the app or through it), but the challan is still pending on Parivahan or in court",
-    "FALSE_SETTLED": "The app showed Settled or Paid, but the government still shows it pending",
+    "FALSE_SETTLED": "Only if the review says the app, SMS or WhatsApp told the user the challan was settled or cleared, while the government still shows it pending. Paying in the app is not enough",
     "WRONG_DATA": "Challan shown that does not exist, belongs to someone else, is missing, or is out of date",
     "REFUND_STUCK": "The user says a refund was not received (failed or rejected payment, or refund promised or asked for)",
     "OVERCHARGE": "Charged far above the fine, or a fee the user did not see before paying",

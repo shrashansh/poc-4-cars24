@@ -56,73 +56,73 @@
   },
   "by_quarter": {
     "2025Q1": {
-      "WRONG_DATA": 8,
-      "PAID_PENDING": 10,
-      "OTHER_CHALLAN": 38,
       "COURT_ROUTING": 1,
+      "FALSE_SETTLED": 1,
+      "OTHER_CHALLAN": 38,
       "OVERCHARGE": 3,
+      "PAID_PENDING": 10,
       "REFUND_STUCK": 12,
-      "FALSE_SETTLED": 1
+      "WRONG_DATA": 8
     },
     "2025Q2": {
       "OTHER_CHALLAN": 46,
-      "PAID_PENDING": 30,
       "OVERCHARGE": 5,
-      "WRONG_DATA": 8,
-      "REFUND_STUCK": 10
+      "PAID_PENDING": 30,
+      "REFUND_STUCK": 10,
+      "WRONG_DATA": 8
     },
     "2025Q3": {
-      "PAID_PENDING": 27,
-      "OTHER_CHALLAN": 65,
       "COURT_ROUTING": 4,
+      "FALSE_SETTLED": 1,
+      "OTHER_CHALLAN": 65,
       "OVERCHARGE": 6,
-      "WRONG_DATA": 10,
+      "PAID_PENDING": 27,
       "REFUND_STUCK": 22,
-      "FALSE_SETTLED": 1
+      "WRONG_DATA": 10
     },
     "2025Q4": {
-      "REFUND_STUCK": 15,
+      "COURT_ROUTING": 1,
       "OTHER_CHALLAN": 51,
-      "WRONG_DATA": 12,
-      "PAID_PENDING": 26,
       "OVERCHARGE": 7,
-      "COURT_ROUTING": 1
+      "PAID_PENDING": 26,
+      "REFUND_STUCK": 15,
+      "WRONG_DATA": 12
     },
     "2026Q1": {
-      "OTHER_CHALLAN": 86,
-      "WRONG_DATA": 18,
-      "PAID_PENDING": 31,
-      "OVERCHARGE": 15,
-      "REFUND_STUCK": 10,
+      "COURT_ROUTING": 3,
       "FALSE_SETTLED": 1,
-      "COURT_ROUTING": 3
+      "OTHER_CHALLAN": 86,
+      "OVERCHARGE": 15,
+      "PAID_PENDING": 31,
+      "REFUND_STUCK": 10,
+      "WRONG_DATA": 18
     },
     "2026Q2": {
-      "PAID_PENDING": 49,
-      "OTHER_CHALLAN": 93,
-      "WRONG_DATA": 22,
-      "OVERCHARGE": 15,
-      "REFUND_STUCK": 21,
       "COURT_ROUTING": 4,
-      "FALSE_SETTLED": 1
+      "FALSE_SETTLED": 1,
+      "OTHER_CHALLAN": 93,
+      "OVERCHARGE": 15,
+      "PAID_PENDING": 49,
+      "REFUND_STUCK": 21,
+      "WRONG_DATA": 22
     },
     "2026Q3": {
-      "PAID_PENDING": 153,
-      "OTHER_CHALLAN": 158,
-      "WRONG_DATA": 51,
-      "REFUND_STUCK": 38,
       "COURT_ROUTING": 7,
+      "FALSE_SETTLED": 10,
+      "OTHER_CHALLAN": 158,
       "OVERCHARGE": 26,
-      "FALSE_SETTLED": 10
+      "PAID_PENDING": 153,
+      "REFUND_STUCK": 38,
+      "WRONG_DATA": 51
     },
     "2026Q4": {
-      "PAID_PENDING": 32,
-      "OVERCHARGE": 6,
-      "REFUND_STUCK": 8,
+      "COURT_ROUTING": 1,
       "FALSE_SETTLED": 4,
       "OTHER_CHALLAN": 36,
-      "WRONG_DATA": 12,
-      "COURT_ROUTING": 1
+      "OVERCHARGE": 6,
+      "PAID_PENDING": 32,
+      "REFUND_STUCK": 8,
+      "WRONG_DATA": 12
     }
   },
   "failing_by_quarter": {

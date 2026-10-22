@@ -81,3 +81,15 @@ class BuildTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ReproducibleTest(unittest.TestCase):
+    def test_metrics_identical_across_hash_seeds(self):
+        import os
+        outs = []
+        for seed in ("1", "2"):
+            env = {**os.environ, "PYTHONHASHSEED": seed}
+            code = "import build, json; print(json.dumps(build.build_metrics(), ensure_ascii=False))"
+            outs.append(subprocess.run([sys.executable, "-c", code], cwd=ROOT, env=env,
+                                       capture_output=True, text=True, check=True).stdout)
+        self.assertEqual(outs[0], outs[1])
