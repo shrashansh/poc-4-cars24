@@ -103,3 +103,18 @@ class EngineTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class EscalationTimingTest(unittest.TestCase):
+    def test_escalates_on_third_working_day_after_deadline_never_weekend(self):
+        from datetime import date as D_, timedelta
+        from engine.settlement import deadline, replay
+        for paid_on in (D_(2026, 9, 28), D_(2026, 9, 29), D_(2026, 9, 30), D_(2026, 10, 1), D_(2026, 10, 2)):
+            p = {"kind": "online", "events": [{"on": paid_on, "type": "FEE_SHOWN", "source": "app"},
+                                              {"on": paid_on, "type": "PAID", "source": "app"}]}
+            due = deadline("online", paid_on)
+            first = next(due + timedelta(days=k) for k in range(1, 15)
+                         if replay(p, due + timedelta(days=k), True)["status"] == "ESCALATED")
+            self.assertLess(first.weekday(), 5, f"escalated on a weekend for payment on {paid_on}")
+            overdue_wd = sum(1 for k in range(1, (first - due).days) if (due + timedelta(days=k)).weekday() < 5)
+            self.assertEqual(overdue_wd, 2, f"payment on {paid_on}")

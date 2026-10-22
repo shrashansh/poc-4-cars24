@@ -88,7 +88,9 @@ def replay(payment: dict, today: date, truth_rule: bool) -> dict:
         out.update(status="SETTLED", shown_to_user="Settled")
     else:
         due = deadline(payment["kind"], paid["on"])
-        escalate_from = add_working_days(due, ESCALATE_AFTER) + timedelta(days=1)
+        # Overdue for ESCALATE_AFTER full working days, then escalate on the next working day
+        # (never on a weekend).
+        escalate_from = add_working_days(due, ESCALATE_AFTER + 1)
         if today >= escalate_from:
             status, owner = "ESCALATED", "ops"
             out["refund_by"] = deadline("refund", escalate_from)   # user may take a refund instead of waiting
