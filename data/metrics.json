@@ -1,0 +1,458 @@
+{
+  "window": [
+    "2025-01-01",
+    "2026-10-22"
+  ],
+  "pulled_on": "2026-10-22",
+  "raw_sha256": {
+    "cars24": "0bc608dad085e24ee89c3a6dea15c5d5c11ac3ead4f9a92481903e0bb92753c3",
+    "carinfo": "64a966758e97351c7ed6faba24d368e9b7d3e5f0b1f516a96fc29dd663d75adc",
+    "vehicleinfo": "be231743588f1cda9e69ab9602d3db1dce4e2358fbe3fe90b130e5ebd92b356e"
+  },
+  "low_star_total": {
+    "cars24": 5232,
+    "carinfo": 2702,
+    "vehicleinfo": 3606
+  },
+  "challan_reviews": {
+    "carinfo": 470,
+    "cars24": 79,
+    "vehicleinfo": 618
+  },
+  "type_counts": {
+    "PAID_PENDING": {
+      "carinfo": 152,
+      "cars24": 19,
+      "vehicleinfo": 187
+    },
+    "FALSE_SETTLED": {
+      "carinfo": 9,
+      "vehicleinfo": 9
+    },
+    "WRONG_DATA": {
+      "carinfo": 61,
+      "cars24": 4,
+      "vehicleinfo": 76
+    },
+    "REFUND_STUCK": {
+      "carinfo": 73,
+      "cars24": 9,
+      "vehicleinfo": 54
+    },
+    "OVERCHARGE": {
+      "carinfo": 25,
+      "cars24": 3,
+      "vehicleinfo": 55
+    },
+    "COURT_ROUTING": {
+      "carinfo": 8,
+      "vehicleinfo": 13
+    },
+    "OTHER_CHALLAN": {
+      "carinfo": 207,
+      "cars24": 50,
+      "vehicleinfo": 316
+    }
+  },
+  "by_quarter": {
+    "2025Q1": {
+      "PAID_PENDING": 10,
+      "WRONG_DATA": 8,
+      "OTHER_CHALLAN": 38,
+      "COURT_ROUTING": 1,
+      "OVERCHARGE": 3,
+      "REFUND_STUCK": 12,
+      "FALSE_SETTLED": 1
+    },
+    "2025Q2": {
+      "OTHER_CHALLAN": 46,
+      "PAID_PENDING": 30,
+      "OVERCHARGE": 5,
+      "WRONG_DATA": 8,
+      "REFUND_STUCK": 10
+    },
+    "2025Q3": {
+      "PAID_PENDING": 27,
+      "OTHER_CHALLAN": 65,
+      "COURT_ROUTING": 4,
+      "OVERCHARGE": 6,
+      "WRONG_DATA": 10,
+      "REFUND_STUCK": 22,
+      "FALSE_SETTLED": 1
+    },
+    "2025Q4": {
+      "REFUND_STUCK": 15,
+      "OTHER_CHALLAN": 51,
+      "WRONG_DATA": 12,
+      "PAID_PENDING": 26,
+      "OVERCHARGE": 7,
+      "COURT_ROUTING": 1
+    },
+    "2026Q1": {
+      "OTHER_CHALLAN": 86,
+      "WRONG_DATA": 18,
+      "PAID_PENDING": 31,
+      "OVERCHARGE": 15,
+      "REFUND_STUCK": 10,
+      "FALSE_SETTLED": 1,
+      "COURT_ROUTING": 3
+    },
+    "2026Q2": {
+      "PAID_PENDING": 49,
+      "OTHER_CHALLAN": 93,
+      "WRONG_DATA": 22,
+      "OVERCHARGE": 15,
+      "REFUND_STUCK": 21,
+      "COURT_ROUTING": 4,
+      "FALSE_SETTLED": 1
+    },
+    "2026Q3": {
+      "PAID_PENDING": 153,
+      "OTHER_CHALLAN": 158,
+      "WRONG_DATA": 51,
+      "REFUND_STUCK": 38,
+      "COURT_ROUTING": 7,
+      "OVERCHARGE": 26,
+      "FALSE_SETTLED": 10
+    },
+    "2026Q4": {
+      "PAID_PENDING": 32,
+      "OVERCHARGE": 6,
+      "REFUND_STUCK": 8,
+      "FALSE_SETTLED": 4,
+      "OTHER_CHALLAN": 36,
+      "WRONG_DATA": 12,
+      "COURT_ROUTING": 1
+    }
+  },
+  "failing_by_quarter": {
+    "2025Q1": 29,
+    "2025Q2": 46,
+    "2025Q3": 58,
+    "2025Q4": 48,
+    "2026Q1": 66,
+    "2026Q2": 88,
+    "2026Q3": 212,
+    "2026Q4": 47
+  },
+  "partial_quarters": [
+    "2026Q4"
+  ],
+  "q3_vs_q2": {
+    "2026Q2": 88,
+    "2026Q3": 212,
+    "ratio": 2.409,
+    "low_star_q2": 1330,
+    "low_star_q3": 2701,
+    "share_q2": 0.066,
+    "share_q3": 0.078,
+    "share_ratio": 1.182
+  },
+  "false_settled_total": 18,
+  "estimates": {
+    "PAID_PENDING": {
+      "observed": 358,
+      "low": 298,
+      "high": 407,
+      "precision": 0.833,
+      "recall": 0.732,
+      "support": 41
+    },
+    "FALSE_SETTLED": {
+      "observed": 18,
+      "low": 18,
+      "high": 36,
+      "precision": 1.0,
+      "recall": 0.5,
+      "support": 6
+    },
+    "WRONG_DATA": {
+      "observed": 141,
+      "low": 117,
+      "high": 305,
+      "precision": 0.833,
+      "recall": 0.385,
+      "support": 26
+    },
+    "REFUND_STUCK": {
+      "observed": 136,
+      "low": 136,
+      "high": 136,
+      "precision": 1.0,
+      "recall": 1.0,
+      "support": 10
+    },
+    "OVERCHARGE": {
+      "observed": 83,
+      "low": 62,
+      "high": 354,
+      "precision": 0.75,
+      "recall": 0.176,
+      "support": 17
+    },
+    "COURT_ROUTING": {
+      "observed": 21,
+      "low": 21,
+      "high": 28,
+      "precision": 1.0,
+      "recall": 0.75,
+      "support": 4
+    }
+  },
+  "control_split": {
+    "in_control": {
+      "count": 474,
+      "share": 0.406
+    },
+    "partial": {
+      "count": 106,
+      "share": 0.091
+    },
+    "structural": {
+      "count": 14,
+      "share": 0.012
+    },
+    "other": {
+      "count": 573,
+      "share": 0.491
+    }
+  },
+  "replies": {
+    "reply_rate": 0.778,
+    "median_reply_hours": 20.0,
+    "redirect_share": 0.831,
+    "timeline_share": 0.029,
+    "timelines_quoted": [
+      [
+        "5–7 working days",
+        12
+      ],
+      [
+        "30–60 days",
+        6
+      ],
+      [
+        "30–45 days",
+        2
+      ],
+      [
+        "5-7 working days",
+        2
+      ],
+      [
+        "30-60 days",
+        1
+      ],
+      [
+        "45–60 days",
+        1
+      ],
+      [
+        "7 working days",
+        1
+      ],
+      [
+        "7 to 10 working days",
+        1
+      ],
+      [
+        "90 days",
+        1
+      ]
+    ]
+  },
+  "validation": {
+    "dev": {
+      "n": 50,
+      "micro_precision": 0.918,
+      "micro_recall": 0.9,
+      "per_type": {
+        "PAID_PENDING": {
+          "precision": 0.952,
+          "recall": 0.8,
+          "support": 25
+        },
+        "FALSE_SETTLED": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "support": 4
+        },
+        "WRONG_DATA": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "support": 5
+        },
+        "REFUND_STUCK": {
+          "precision": 0.889,
+          "recall": 1.0,
+          "support": 8
+        },
+        "OVERCHARGE": {
+          "precision": 0.875,
+          "recall": 1.0,
+          "support": 7
+        },
+        "COURT_ROUTING": {
+          "precision": 0.5,
+          "recall": 1.0,
+          "support": 1
+        }
+      }
+    },
+    "test": {
+      "n": 100,
+      "micro_precision": 0.868,
+      "micro_recall": 0.567,
+      "per_type": {
+        "PAID_PENDING": {
+          "precision": 0.833,
+          "recall": 0.732,
+          "support": 41
+        },
+        "FALSE_SETTLED": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "support": 6
+        },
+        "WRONG_DATA": {
+          "precision": 0.833,
+          "recall": 0.385,
+          "support": 26
+        },
+        "REFUND_STUCK": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "support": 10
+        },
+        "OVERCHARGE": {
+          "precision": 0.75,
+          "recall": 0.176,
+          "support": 17
+        },
+        "COURT_ROUTING": {
+          "precision": 1.0,
+          "recall": 0.75,
+          "support": 4
+        }
+      }
+    }
+  },
+  "sample_estimates": {
+    "n": 150,
+    "population": 1167,
+    "failure_reviews": 116,
+    "not_challan": 2,
+    "types": {
+      "PAID_PENDING": {
+        "k": 66,
+        "share": 0.44,
+        "ci": [
+          0.363,
+          0.52
+        ],
+        "scaled": 513,
+        "scaled_ci": [
+          424,
+          607
+        ]
+      },
+      "FALSE_SETTLED": {
+        "k": 10,
+        "share": 0.067,
+        "ci": [
+          0.0366,
+          0.1184
+        ],
+        "scaled": 78,
+        "scaled_ci": [
+          43,
+          138
+        ]
+      },
+      "WRONG_DATA": {
+        "k": 31,
+        "share": 0.207,
+        "ci": [
+          0.1496,
+          0.2784
+        ],
+        "scaled": 241,
+        "scaled_ci": [
+          175,
+          325
+        ]
+      },
+      "REFUND_STUCK": {
+        "k": 18,
+        "share": 0.12,
+        "ci": [
+          0.0773,
+          0.1817
+        ],
+        "scaled": 140,
+        "scaled_ci": [
+          90,
+          212
+        ]
+      },
+      "OVERCHARGE": {
+        "k": 24,
+        "share": 0.16,
+        "ci": [
+          0.1099,
+          0.227
+        ],
+        "scaled": 187,
+        "scaled_ci": [
+          128,
+          265
+        ]
+      },
+      "COURT_ROUTING": {
+        "k": 5,
+        "share": 0.033,
+        "ci": [
+          0.0143,
+          0.0757
+        ],
+        "scaled": 39,
+        "scaled_ci": [
+          17,
+          88
+        ]
+      }
+    },
+    "control": {
+      "in_control": {
+        "k": 86,
+        "share": 0.741,
+        "ci": [
+          0.6549,
+          0.8124
+        ],
+        "scaled": null,
+        "scaled_ci": null
+      },
+      "partial": {
+        "k": 29,
+        "share": 0.25,
+        "ci": [
+          0.1801,
+          0.336
+        ],
+        "scaled": null,
+        "scaled_ci": null
+      },
+      "structural": {
+        "k": 1,
+        "share": 0.009,
+        "ci": [
+          0.0015,
+          0.0472
+        ],
+        "scaled": null,
+        "scaled_ci": null
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+[
+  {"id": "S1", "status": "VERIFIED-PRIMARY", "claim": "cars24.com collects the challan amount and settles it on the user's behalf; the page states no fee, timeline or refund terms",
+   "quote": "Pay the due amount online, and Cars24 will settle the challan.", "url": "https://www.cars24.com/traffic-challan/", "fetched": "2026-10-22"},
+  {"id": "S2", "status": "VERIFIED-PRIMARY", "claim": "CarInfo lists challan payment as a third-party affiliate service used at the user's own risk; no timeline, fee or partner named",
+   "quote": "Carinfo also features certain services provided by its third-party affiliates, including: … Traffic Challan Payment", "url": "https://www.carinfo.app/terms-and-conditions", "fetched": "2026-10-22"},
+  {"id": "S3", "status": "VERIFIED-PRIMARY", "claim": "CarInfo refund policy: challan payments are non-refundable once processed",
+   "quote": "all digital services, including insurance, FASTag, challan payments… are strictly non-refundable and non-cancellable once processed.", "url": "https://www.carinfo.app/refund-policy", "fetched": "2026-10-22"},
+  {"id": "S4", "status": "VERIFIED-PRIMARY", "claim": "VehicleInfo pays challans through unnamed partners (developer reply on Google Play, 2026-04-24)",
+   "quote": "VehicleInfo collects challan payments and pays them to the respective RTO via secure, authorized partners", "url": "https://play.google.com/store/apps/details?id=com.vehicle.rto.vahan.status.information.register", "fetched": "2026-10-22"},
+  {"id": "S5", "status": "VERIFIED-PRIMARY", "claim": "A challan forwarded to the Virtual Court can still be paid online on the government site",
+   "quote": "This challan has been forwarded to Virtual Court (https://vcourts.gov.in/), but still it can be paid here.", "url": "https://echallan.parivahan.gov.in/index/accused-challan", "fetched": "2026-10-22"},
+  {"id": "S6", "status": "VERIFIED-SECONDARY", "claim": "CMV (Third Amendment) Rules 2026, G.S.R. 48(E), in force 21 Jan 2026; reported 45-day contest window and 'Not to be transacted' blocking for unpaid challans",
+   "quote": "This shall come into force on January 21, 2026.", "url": "https://teamleaseregtech.com/updates/article/52088/", "fetched": "2026-10-22"},
+  {"id": "S7", "status": "VERIFIED-PRIMARY", "claim": "Spinny's challan provider (Pureride) does not guarantee settlement",
+   "quote": "Pureride does not guarantee or make any representations that the challans shall be settled", "url": "https://www.spinny.com/e-challan/terms-and-conditions/", "fetched": "2026-10-22"},
+  {"id": "S8", "status": "VERIFIED-PRIMARY", "claim": "RBI Payment Aggregator directions require extra charges to be shown before payment (whether challan apps are PAs is untested)",
+   "quote": "shall ensure that any charges, other than the price… are distinctly displayed to the payer prior to the transaction", "url": "https://rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=12896", "fetched": "2026-10-22"}
+]

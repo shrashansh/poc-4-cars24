@@ -1,0 +1,297 @@
+<title>Challan Settlement Audit</title>
+<style>
+:root{--bg:#f7f7f5;--card:#fff;--ink:#1c1c1a;--muted:#6b6b66;--line:#e3e2dd;--accent:#e85d1a;--accent-soft:#fde7dc;
+--good:#1f8a5b;--warn:#b7791f;--bad:#c53030;--chip:#efeee9;--mono:ui-monospace,SFMono-Regular,Menlo,monospace}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#121211;--card:#1b1b19;--ink:#ecebe6;--muted:#a3a29b;
+--line:#2e2e2b;--accent:#ff7a3d;--accent-soft:#3a2216;--good:#4cc38a;--warn:#e0a548;--bad:#f07070;--chip:#262624}}
+:root[data-theme="dark"]{--bg:#121211;--card:#1b1b19;--ink:#ecebe6;--muted:#a3a29b;--line:#2e2e2b;--accent:#ff7a3d;
+--accent-soft:#3a2216;--good:#4cc38a;--warn:#e0a548;--bad:#f07070;--chip:#262624}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{padding:28px 16px 8px;max-width:1080px;margin:0 auto}
+header h1{margin:0 0 4px;font-size:24px;letter-spacing:-.01em}
+header p{margin:0;color:var(--muted);max-width:760px}
+nav{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+nav .in{max-width:1080px;margin:0 auto;padding:0 16px;display:flex;gap:4px;overflow-x:auto}
+nav button{background:none;border:0;border-bottom:2px solid transparent;color:var(--muted);padding:12px 10px;font:inherit;cursor:pointer;white-space:nowrap}
+nav button[aria-selected="true"]{color:var(--ink);border-color:var(--accent);font-weight:600}
+main{max-width:1080px;margin:0 auto;padding:16px}
+section[hidden]{display:none}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
+.big{font-size:30px;font-weight:700;letter-spacing:-.02em}
+.sub{color:var(--muted);font-size:13px}
+h2{font-size:18px;margin:24px 0 8px}
+h3{font-size:15px;margin:0 0 8px}
+.note{background:var(--accent-soft);border-radius:8px;padding:10px 12px;font-size:14px}
+.tag{display:inline-block;background:var(--chip);border-radius:999px;padding:1px 8px;font-size:12px;margin:1px 2px 1px 0}
+.sim{display:inline-block;background:var(--warn);color:#fff;border-radius:4px;padding:2px 8px;font-weight:700;font-size:12px;letter-spacing:.05em}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.scroll{overflow-x:auto}
+.bar{height:10px;background:var(--chip);border-radius:6px;position:relative;margin:6px 0}
+.bar .fill{position:absolute;top:0;bottom:0;left:0;background:var(--accent);border-radius:6px}
+.bar .ci{position:absolute;top:-3px;bottom:-3px;border-left:2px solid var(--ink);border-right:2px solid var(--ink);opacity:.45}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 12px}
+select,input{font:inherit;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink)}
+input{flex:1;min-width:180px}
+.q{font-size:14px;min-width:220px}
+.mono{font-family:var(--mono);font-size:12px}
+.bad{color:var(--bad)}
+svg text{fill:var(--muted);font-size:11px}
+a{color:var(--accent)}
+select{max-width:100%}
+html,body{overflow-x:hidden}
+header p,td{overflow-wrap:break-word}
+.tag{overflow-wrap:normal}
+@media (max-width:640px){#evidence th:nth-child(5),#evidence td:nth-child(5){display:none}.q{min-width:0}.big{font-size:26px}}
+footer{max-width:1080px;margin:0 auto;padding:24px 16px 40px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Challan Settlement Audit</h1>
+  <p>Cars24 collects traffic-challan payments on cars24.com, CarInfo and VehicleInfo, and a partner pays the government. What do users report when it goes wrong, how much of it can Cars24 fix, and what would a “never say Settled until the government confirms” rule change?</p>
+</header>
+<nav><div class="in" role="tablist">
+  <button role="tab" data-tab="audit" aria-selected="true">Audit</button>
+  <button role="tab" data-tab="evidence">Evidence</button>
+  <button role="tab" data-tab="engine">Engine</button>
+  <button role="tab" data-tab="inspection">At inspection</button>
+  <button role="tab" data-tab="method">Method</button>
+</div></nav>
+<main>
+
+<section id="audit">
+  <p class="note">Real Google Play reviews (1-2★). These count public complaints, so more people are affected than shown here. Cars24 does not publish how many challans it settles, so no failure <i>rate</i> is shown.</p>
+  <div class="grid" id="kpis"></div>
+  <h2>Challan-failure reviews per quarter</h2>
+  <div class="card"><div id="trend" class="scroll"></div><div class="sub">Counts from the keyword rules (which miss some reviews and wrongly flag a few). * 2026 Q4 covers only 1–22 Oct.</div></div>
+  <h2>Who can fix it</h2>
+  <div class="card" id="control"></div>
+  <h2>What users report</h2>
+  <div class="card scroll" id="types"></div>
+  <h2>How support answers</h2>
+  <div class="card" id="replies"></div>
+</section>
+
+<section id="evidence" hidden>
+  <p class="sub">Masked review text: phone numbers, emails, registration numbers, challan numbers and UPI handles are replaced. Types come from the keyword rules.</p>
+  <div class="filters">
+    <select id="fType"><option value="">All types</option></select>
+    <select id="fApp"><option value="">All apps</option></select>
+    <select id="fQ"><option value="">All quarters</option></select>
+    <input id="fText" placeholder="Search text…">
+  </div>
+  <div class="sub" id="evCount"></div>
+  <div class="card scroll"><table><thead><tr><th>Date</th><th>App</th><th>Types</th><th>Review</th><th>Developer reply</th></tr></thead><tbody id="evRows"></tbody></table></div>
+</section>
+
+<section id="engine" hidden>
+  <p class="note"><span class="sim">SIMULATED</span> These 1,000 payments are simulated. The mix of failures comes from the labelled review sample. The overall failure rate (10%), the split between challan types, the amounts and the timings are <b>assumed</b>. This shows what the truth rule changes; it does not measure Cars24.</p>
+  <div class="grid" id="engKpis"></div>
+  <h2>Rules</h2>
+  <div class="card scroll"><table><thead><tr><th></th><th>As observed today</th><th>With the truth rule</th></tr></thead><tbody>
+    <tr><td>“Settled” shown when</td><td>the partner says it is paid</td><td>a government confirmation with a named source arrives (receipt, partner status check, manual portal check)</td></tr>
+    <tr><td>Deadline</td><td>none published</td><td>online and virtual court: 7 working days; court: 90 days; refund: 7 working days (from Cars24's own replies)</td></tr>
+    <tr><td>Past the deadline</td><td>the user chases support</td><td>overdue, owned by the partner; escalated to ops 2 working days later</td></tr>
+    <tr><td>Payment rejected</td><td>“non-refundable”</td><td>refund due by a date, owned by finance</td></tr>
+    <tr><td>Fee</td><td>sometimes seen only after paying</td><td>flagged unless shown before payment</td></tr>
+  </tbody></table></div>
+  <h2>Exception queue (truth rule) <span class="sim">SIMULATED</span></h2>
+  <div class="filters"><select id="fStatus"></select></div>
+  <div class="card scroll"><table><thead><tr><th>Payment</th><th>Type</th><th>Fine</th><th>Users see today</th><th>With truth rule</th><th>Owner</th><th>Due</th><th>Flags</th></tr></thead><tbody id="queue"></tbody></table></div>
+</section>
+
+<section id="inspection" hidden>
+  <div class="card">
+    <h3>Same engine, at seller inspection (described here, not built)</h3>
+    <p>Unpaid challans now block car transactions. The CMV Rules 2026, G.S.R. 48(E), have been in force since 21 Jan 2026 (secondary source), and press reports a “Not to be transacted” block. Every challan on a car Cars24 buys therefore becomes a holdback or a delay in the RC transfer.</p>
+    <p>Run the same state machine at inspection:</p>
+    <ol><li>Fetch the car's challans.</li><li>Pay online and virtual-court challans directly.</li><li>Route physical-court challans to a lawyer, with the timeline disclosed.</li><li>Release the seller's holdback only on government confirmation, and refund automatically if a deadline is missed.</li></ol>
+    <p>The seller hands over a car with a challan status that has been checked, and Cars24 holds back money only for challans that are actually open.</p>
+    <p class="sub" id="inspSources"></p>
+  </div>
+</section>
+
+<section id="method" hidden>
+  <h2>Method</h2>
+  <div class="card">
+    <ol>
+      <li><b>Collect.</b> 1-2★ Google Play reviews of Cars24, CarInfo and VehicleInfo, 2025-01-01 to 2026-10-22, pulled on 2026-10-22. The SHA-256 of each raw file is in <span class="mono">data/metrics.json</span>.</li>
+      <li><b>Mask.</b> Reviewer names and photos are never shipped. Phone numbers, emails, registration numbers, challan numbers, UPI handles and ID numbers are masked, and a test fails the build if any leak.</li>
+      <li><b>Classify.</b> Deterministic keyword rules covering English, Hinglish and Devanagari, with no language model. Every build gives the same result.</li>
+      <li><b>Label.</b> A stratified random sample of 150 challan reviews (seed 24) was read one by one and labelled against the six definitions. The rules were tuned on rows 1 to 50; rows 51 to 150 were held out and scored once. Labels and rules come from the same analysis, so the held-out score is probably a little optimistic.</li>
+      <li><b>Estimate.</b> Headline shares come from the labelled sample with 95% Wilson intervals, scaled to all challan reviews.</li>
+    </ol>
+  </div>
+  <h2>Classifier accuracy (held-out 100)</h2>
+  <div class="card scroll" id="val"></div>
+  <h2>What this does not show</h2>
+  <div class="card"><ul>
+    <li>Reviews are self-selected, so these are complaint counts, not failure rates.</li>
+    <li>Whether a stuck challan is Cars24's fault or its partner's is inferred from how the user describes it, not from internal records.</li>
+    <li>No live Parivahan or e-challan calls and no Cars24 data. The engine's government confirmation is a stub.</li>
+    <li>No regulator action against any challan app was found as of 2026-10-22.</li>
+  </ul></div>
+  <h2>Sources</h2>
+  <div class="card scroll" id="sources"></div>
+</section>
+</main>
+<footer>POC by Shrashansh Dixit. Not affiliated with Cars24. Built from public information only.</footer>
+
+<script>
+// All dynamic content is built with DOM nodes and text nodes (no HTML strings), so review text cannot inject markup.
+const $ = s => document.querySelector(s);
+function h(tag, props, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(props || {})) {
+    if (k === "class") e.className = v; else if (k === "style") e.style.cssText = v; else e.setAttribute(k, v);
+  }
+  for (const c of kids.flat()) if (c !== null && c !== undefined && c !== false)
+    e.append(c instanceof Node ? c : document.createTextNode(String(c)));
+  return e;
+}
+function sv(tag, attrs, ...kids) {
+  const e = document.createElementNS("http://www.w3.org/2000/svg", tag);
+  for (const [k, v] of Object.entries(attrs || {})) e.setAttribute(k, v);
+  for (const c of kids.flat()) e.append(c instanceof Node ? c : document.createTextNode(String(c)));
+  return e;
+}
+const put = (sel, ...kids) => $(sel).replaceChildren(...kids.flat());
+const pct = x => Math.round(x * 100) + "%";
+const fmt = n => Number(n).toLocaleString("en-IN");
+const ciTxt = ci => `${pct(ci[0])}–${pct(ci[1])}`;
+const sum = o => Object.values(o).reduce((a, b) => a + b, 0);
+const TYPE_LABEL = {PAID_PENDING: "Paid, still pending", FALSE_SETTLED: "App said “Settled”, government pending",
+  WRONG_DATA: "Wrong, missing or stale challan", REFUND_STUCK: "Refund not received", OVERCHARGE: "Overcharged or hidden fee",
+  COURT_ROUTING: "Court involved", OTHER_CHALLAN: "Other challan issue"};
+const APP = {cars24: "Cars24", carinfo: "CarInfo", vehicleinfo: "VehicleInfo"};
+const quarter = at => at.slice(0, 4) + "Q" + (Math.floor((+at.slice(5, 7) - 1) / 3) + 1);
+const tags = list => list.map(x => h("span", {class: "tag"}, TYPE_LABEL[x] || x));
+const opt = (value, label) => h("option", {value}, label);
+const card = (big, text, sub) => h("div", {class: "card"}, h("div", {class: "big"}, big), h("div", {}, text), h("div", {class: "sub"}, sub));
+
+function showTab(id) {
+  document.querySelectorAll("nav button").forEach(x => x.setAttribute("aria-selected", x.dataset.tab === id));
+  document.querySelectorAll("main section").forEach(s => s.hidden = s.id !== id);
+}
+document.querySelectorAll("nav button").forEach(b => b.onclick = () => { showTab(b.dataset.tab); history.replaceState(null, "", "#" + b.dataset.tab); });
+if (document.getElementById(location.hash.slice(1))) showTab(location.hash.slice(1));
+
+fetch("data.json").then(r => r.json()).then(render).catch(e => put("#kpis",
+  h("div", {class: "card bad"}, `Could not load data.json (${e.message}). Run python3 build.py and serve dist/.`)));
+
+function render(d) {
+  const m = d.metrics, s = m.sample_estimates, src = Object.fromEntries(d.sources.map(x => [x.id, x]));
+  const fs = s.types.FALSE_SETTLED, ic = s.control.in_control;
+  put("#kpis",
+    card(pct(ic.share), "of challan failures fall within Cars24's and its payment partner's control, based on how users describe them", `95% CI ${ciTxt(ic.ci)} · ${s.failure_reviews} failure reviews in a labelled sample`),
+    card("≈" + fmt(fs.scaled), "reviews say the app showed “Settled” or “Paid” while the government still showed the challan pending", `95% CI ${fmt(fs.scaled_ci[0])} to ${fmt(fs.scaled_ci[1])}`),
+    card(pct(m.q3_vs_q2.share_q2) + " → " + pct(m.q3_vs_q2.share_q3), "of all 1-2★ reviews were challan failures, 2026 Q2 to Q3", `keyword rules flag ${m.q3_vs_q2["2026Q2"]} → ${m.q3_vs_q2["2026Q3"]}; all 1-2★ reviews ${fmt(m.q3_vs_q2.low_star_q2)} → ${fmt(m.q3_vs_q2.low_star_q3)}`),
+    card(pct(m.replies.timeline_share), `of developer replies give any timeline; ${pct(m.replies.redirect_share)} point to email or a form`, "published terms: no settlement or refund timeline"));
+
+  const qs = Object.keys(m.failing_by_quarter), vals = qs.map(q => m.failing_by_quarter[q]);
+  const W = Math.max(520, qs.length * 70), H = 180, max = Math.max(...vals), bw = W / qs.length;
+  const bars = qs.flatMap((q, i) => {
+    const hh = vals[i] / max * H, x = i * bw + bw * .2, part = m.partial_quarters.includes(q);
+    return [sv("rect", {x, y: H - hh + 24, width: bw * .6, height: hh, rx: 3, fill: "var(--accent)", opacity: part ? .4 : 1}),
+      sv("text", {x: x + bw * .3, y: H - hh + 18, "text-anchor": "middle"}, vals[i]),
+      sv("text", {x: x + bw * .3, y: H + 42, "text-anchor": "middle"}, q + (part ? "*" : ""))];
+  });
+  put("#trend", sv("svg", {viewBox: `0 0 ${W} ${H + 48}`, width: "100%", style: "min-width:420px", role: "img",
+    "aria-label": "Challan failure reviews by quarter"}, bars));
+
+  const bucket = (k, label) => { const b = s.control[k];
+    return h("div", {style: "margin:10px 0"},
+      h("div", {}, h("b", {}, pct(b.share)), " " + label + " ", h("span", {class: "sub"}, `(95% CI ${ciTxt(b.ci)})`)),
+      h("div", {class: "bar"}, h("div", {class: "fill", style: `width:${b.share * 100}%`}),
+        h("div", {class: "ci", style: `left:${b.ci[0] * 100}%;width:${(b.ci[1] - b.ci[0]) * 100}%`}))); };
+  put("#control",
+    bucket("in_control", "within Cars24's and its partner's control: false “Settled”, paid but still pending, stuck refunds, fees"),
+    bucket("partial", "wrong, missing or stale challan data"),
+    bucket("structural", "described as a physical-court case"),
+    h("div", {class: "sub"}, `From ${s.failure_reviews} failure reviews in a labelled random sample of ${s.n}, based on how users describe the failure. A Virtual Court challan can still be paid online on the government site (source S5).`));
+
+  const rows = Object.entries(s.types).sort((a, b) => b[1].k - a[1].k).map(([t, e]) => h("tr", {},
+    h("td", {}, TYPE_LABEL[t]), h("td", {}, "≈" + fmt(e.scaled) + " ", h("span", {class: "sub"}, `(${fmt(e.scaled_ci[0])}–${fmt(e.scaled_ci[1])})`)),
+    h("td", {}, `${e.k}/${s.n}`), h("td", {}, fmt(m.estimates[t].observed))));
+  put("#types", h("table", {}, h("thead", {}, h("tr", {}, ["What users report", "Estimated reviews (95% CI)", "In labelled sample", "Keyword rules flag"].map(x => h("th", {}, x)))),
+    h("tbody", {}, rows)), h("div", {class: "sub"}, `A review can report more than one problem. Base: ${fmt(sum(m.challan_reviews))} challan reviews out of ${fmt(sum(m.low_star_total))} 1-2★ reviews.`));
+
+  put("#replies",
+    h("p", {}, "The developer replied to ", h("b", {}, pct(m.replies.reply_rate)), ` of challan reviews (median ${Math.round(m.replies.median_reply_hours)} h). `,
+      h("b", {}, pct(m.replies.redirect_share)), " of replies point to an email address or a form; ", h("b", {}, pct(m.replies.timeline_share)), " give a timeline."),
+    h("p", {}, "Timelines quoted in replies: ", m.replies.timelines_quoted.map(([t, n]) => h("span", {class: "tag"}, `${t} ×${n}`))),
+    h("p", {}, `Published terms give none of these timelines. cars24.com: “${src.S1.quote}” CarInfo refund policy: “${src.S3.quote}”`));
+
+  evidence(d.reviews);
+  engine(d);
+  put("#inspSources", "Sources: ", ["S1", "S6", "S5"].flatMap((i, n) => [n ? ", " : "", h("a", {href: src[i].url, rel: "noopener"}, i)]));
+  method(d);
+}
+
+function evidence(reviews) {
+  $("#fApp").append(...Object.entries(APP).map(([k, v]) => opt(k, v)));
+  $("#fQ").append(...[...new Set(reviews.map(r => quarter(r.at)))].sort().map(q => opt(q, q)));
+  $("#fType").append(...Object.entries(TYPE_LABEL).map(([k, v]) => opt(k, v)));
+  const draw = () => {
+    const t = $("#fType").value, a = $("#fApp").value, q = $("#fQ").value, txt = $("#fText").value.toLowerCase();
+    const rows = reviews.filter(r => (!t || r.types.includes(t)) && (!a || r.app === a) && (!q || quarter(r.at) === q)
+      && (!txt || r.text.toLowerCase().includes(txt)));
+    $("#evCount").textContent = `${fmt(rows.length)} reviews${rows.length > 300 ? " (showing the newest 300)" : ""}`;
+    put("#evRows", rows.slice().sort((x, y) => y.at.localeCompare(x.at)).slice(0, 300).map(r => h("tr", {},
+      h("td", {class: "mono"}, r.at.slice(0, 10)), h("td", {}, APP[r.app]), h("td", {}, tags(r.types)),
+      h("td", {class: "q"}, r.text), h("td", {class: "q sub"}, r.reply))));
+  };
+  ["#fType", "#fApp", "#fQ"].forEach(s => $(s).onchange = draw);
+  $("#fText").oninput = draw;
+  draw();
+}
+
+function engine(d) {
+  const P = d.payments, R = d.replays;
+  const obsSettled = P.filter(p => R[p.id].observed.shown_to_user === "Settled").length;
+  const truthSettled = P.filter(p => R[p.id].truth.status === "SETTLED").length;
+  const falseSettled = P.filter(p => R[p.id].observed.shown_to_user === "Settled" && R[p.id].truth.status !== "SETTLED").length;
+  const queue = P.filter(p => !["SETTLED", "REFUNDED"].includes(R[p.id].truth.status));
+  const flagged = P.filter(p => R[p.id].truth.flags.length).length;
+  const simCard = (b, t) => h("div", {class: "card"}, h("div", {class: "big"}, b), h("div", {}, t), h("div", {class: "sub"}, h("span", {class: "sim"}, "SIMULATED")));
+  put("#engKpis",
+    simCard(fmt(falseSettled), "users told “Settled” today when the government never confirmed (the truth rule shows 0)"),
+    simCard(fmt(obsSettled) + " → " + fmt(truthSettled), "payments shown “Settled”, today against the truth rule"),
+    simCard(fmt(queue.length), "open payments, each with an owner and a due date"),
+    simCard(fmt(flagged), "payments flagged (unconfirmed partner claim, fee not shown, refund overdue)"));
+  const EXC = ["OVERDUE", "ESCALATED", "REFUND_DUE"];
+  const nExc = queue.filter(p => EXC.includes(R[p.id].truth.status)).length;
+  const statuses = [...new Set(queue.map(p => R[p.id].truth.status))].sort();
+  $("#fStatus").replaceChildren(opt("exceptions", `Exceptions: overdue, escalated, refund due (${nExc})`),
+    opt("", `All open (${queue.length})`), ...statuses.map(s => opt(s, s)));
+  const draw = () => {
+    const f = $("#fStatus").value;
+    const keep = p => f === "exceptions" ? EXC.includes(R[p.id].truth.status) : (!f || R[p.id].truth.status === f);
+    put("#queue", queue.filter(keep).slice(0, 200).map(p => {
+      const o = R[p.id].observed, t = R[p.id].truth;
+      return h("tr", {}, h("td", {class: "mono"}, p.id), h("td", {}, p.kind), h("td", {}, "₹" + fmt(p.fine)),
+        h("td", {class: o.shown_to_user === "Settled" ? "bad" : ""}, o.shown_to_user), h("td", {}, t.shown_to_user),
+        h("td", {}, t.owner || "–"), h("td", {class: "mono"}, t.deadline || "–"), h("td", {}, t.flags.map(x => h("span", {class: "tag"}, x))));
+    }));
+  };
+  $("#fStatus").onchange = draw;
+  draw();
+}
+
+function method(d) {
+  const v = d.metrics.validation.test;
+  put("#val", h("p", {}, "Micro precision ", h("b", {}, v.micro_precision.toFixed(2)), ", recall ", h("b", {}, v.micro_recall.toFixed(2)), ` on ${v.n} held-out reviews.`),
+    h("table", {}, h("thead", {}, h("tr", {}, ["Type", "Precision", "Recall", "Support"].map(x => h("th", {}, x)))),
+      h("tbody", {}, Object.entries(v.per_type).map(([t, x]) => h("tr", {}, h("td", {}, TYPE_LABEL[t]),
+        h("td", {}, x.precision.toFixed(2)), h("td", {}, x.recall.toFixed(2)), h("td", {}, x.support))))));
+  put("#sources", h("table", {}, h("thead", {}, h("tr", {}, ["ID", "Status", "Claim and quote"].map(x => h("th", {}, x)))),
+    h("tbody", {}, d.sources.map(s => h("tr", {}, h("td", {}, s.id), h("td", {}, s.status),
+      h("td", {}, s.claim, h("br"), h("span", {class: "sub"}, `“${s.quote}”`), h("br"),
+        h("a", {href: s.url, rel: "noopener"}, s.url), h("span", {class: "sub"}, ` fetched ${s.fetched}`)))))));
+}
+</script>
+</body>
