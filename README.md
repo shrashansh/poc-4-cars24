@@ -8,7 +8,7 @@ Cars24 lets people pay traffic challans on cars24.com, CarInfo and VehicleInfo. 
 
 When this goes wrong, the user has paid but the challan is still open. Their Google Play reviews tell the same story again and again: money taken, the challan still pending on Parivahan weeks later, a refund that never arrives. Some say the app showed "Settled" while the government site still showed the challan as unpaid.
 
-This matters more in 2026 than before. On 28 September 2026 the Supreme Court directed states to blacklist vehicles with unpaid e-challans and block their ownership transfer (S6), and a draft amendment would mark them "Not to be Transacted" (S9, not yet in force). For Cars24 that is no longer only an app-store problem. It touches every car it buys and sells.
+This matters more in 2026 than before. On 28 September 2026 the Supreme Court directed states to blacklist vehicles with unpaid e-challans and block their ownership transfer (S6), and under amended Rule 167 such vehicles are marked "Not to be Transacted" on Vahan (S9, applied by the Orissa High Court in February 2026). For Cars24 that is no longer only an app-store problem. It touches every car it buys and sells.
 
 ## The numbers
 
@@ -109,6 +109,6 @@ Python 3.10 or later, no other dependencies. `python3 prepare.py` rebuilds `data
 | S6 | Supreme Court, S. Rajaseekaran v. Union of India, 28 Sep 2026: block ownership transfer for unpaid e-challans (LiveLaw report) | https://www.livelaw.in/top-stories/impound-vehicles-with-unpaid-e-challans-freeze-online-services-supreme-court-orders-notes-over-23000-crore-traffic-fines-pending-552686 |
 | S7 | Spinny's provider Pureride "does not guarantee … that the challans shall be settled" | https://www.spinny.com/e-challan/terms-and-conditions/ |
 | S8 | RBI payment aggregator directions: other charges must be "distinctly displayed to the payer prior to the transaction" | https://rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=12896 |
-| S9 | Draft CMV amendment: "Not to be Transacted" flag for unpaid challans (draft, not in force) | https://www.digit.in/news/general/unpaid-traffic-challan-your-rc-and-driving-licence-may-soon-get-blocked-here-is-how-to-pay-online.html |
+| S9 | Amended Rule 167: "Not to be Transacted" for unpaid challans, applied by the Orissa High Court, 10 Feb 2026 (StudyCafe report; gazette not read) | https://studycafe.in/hc-rules-fuel-cannot-be-denied-for-pending-challans-upholds-puc-refusal-under-amended-rule-167-411163.html |
 | S10 | Cars24 acquires CarInfo, 5 Jan 2026 (MediaNama) | https://www.medianama.com/2026/01/223-cars24-acquires-carinfo-rs-118-crore-ahead-ipo/ |
 | S11 | Cars24 acquires Vehicle Info, reported 11 Mar 2026 (Entrepreneur India) | https://india.entrepreneur.com/news-and-trends/cars24-acquires-automotive-utility-app-vehicle-info/503346 |
