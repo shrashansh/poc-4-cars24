@@ -1,0 +1,49 @@
+{
+  "window": [
+    "2025-01-01",
+    "2026-10-22"
+  ],
+  "pulled_on": "2026-10-22",
+  "apps": {
+    "cars24": "com.cars24.seller",
+    "carinfo": "com.cuvora.carinfo",
+    "vehicleinfo": "com.vehicle.rto.vahan.status.information.register"
+  },
+  "raw_sha256": {
+    "cars24": "0bc608dad085e24ee89c3a6dea15c5d5c11ac3ead4f9a92481903e0bb92753c3",
+    "carinfo": "64a966758e97351c7ed6faba24d368e9b7d3e5f0b1f516a96fc29dd663d75adc",
+    "vehicleinfo": "be231743588f1cda9e69ab9602d3db1dce4e2358fbe3fe90b130e5ebd92b356e"
+  },
+  "low_star": {
+    "cars24": {
+      "2025Q1": 447,
+      "2025Q2": 496,
+      "2025Q3": 710,
+      "2025Q4": 813,
+      "2026Q1": 891,
+      "2026Q2": 762,
+      "2026Q3": 871,
+      "2026Q4": 242
+    },
+    "carinfo": {
+      "2025Q1": 308,
+      "2025Q2": 303,
+      "2025Q3": 352,
+      "2025Q4": 251,
+      "2026Q1": 275,
+      "2026Q2": 225,
+      "2026Q3": 797,
+      "2026Q4": 191
+    },
+    "vehicleinfo": {
+      "2025Q1": 349,
+      "2025Q2": 292,
+      "2025Q3": 461,
+      "2025Q4": 391,
+      "2026Q1": 403,
+      "2026Q2": 343,
+      "2026Q3": 1033,
+      "2026Q4": 334
+    }
+  }
+}

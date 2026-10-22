@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.venv/
+dist/
+raw/
+label_check.html
+.DS_Store
